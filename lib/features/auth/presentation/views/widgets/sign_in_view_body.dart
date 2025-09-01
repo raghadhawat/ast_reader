@@ -6,7 +6,7 @@ import 'package:ast_reader/core/widgets/custom_button.dart';
 import 'package:ast_reader/core/widgets/custom_text_form_field.dart';
 import 'package:ast_reader/features/auth/presentation/views/sign_up_view.dart';
 import 'package:ast_reader/features/auth/presentation/views/widgets/auth_in_link.dart';
-import 'package:ast_reader/features/main/home/presentation/views/home_view.dart';
+import 'package:ast_reader/features/home/presentation/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
