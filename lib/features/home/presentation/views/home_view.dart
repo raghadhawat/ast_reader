@@ -1,5 +1,7 @@
 import 'package:ast_reader/constants.dart';
 import 'package:ast_reader/core/utils/app_assets.dart';
+import 'package:ast_reader/core/utils/functions/navigate_function.dart';
+import 'package:ast_reader/features/capture/presentation/views/capture_view.dart';
 import 'package:ast_reader/features/home/presentation/views/all_result_view.dart';
 import 'package:ast_reader/features/home/presentation/views/confussing_view.dart';
 import 'package:ast_reader/features/home/presentation/views/search_view.dart';
@@ -43,7 +45,7 @@ class _HomeViewState extends State<HomeView> {
           backgroundColor: kPrimaryColor,
           elevation: 3,
           onPressed: () {
-            // TODO: your action
+            navigateTo(context, CaptureView());
           },
           child: const Icon(Icons.add, color: Colors.white, size: 28),
         ),
