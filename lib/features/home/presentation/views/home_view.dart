@@ -1,8 +1,10 @@
 import 'package:ast_reader/constants.dart';
+import 'package:ast_reader/core/utils/app_assets.dart';
 import 'package:ast_reader/features/home/presentation/views/all_result_view.dart';
 import 'package:ast_reader/features/home/presentation/views/confussing_view.dart';
 import 'package:ast_reader/features/home/presentation/views/search_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -23,6 +25,15 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: kPrimaryColor,
+          foregroundColor: Colors.white,
+          title: SvgPicture.asset(
+            Assets.imagesWhiteLogo,
+            height: 20,
+          ),
+        ),
         extendBody: true, // lets the FAB float nicely
         body: _pages[_index],
 

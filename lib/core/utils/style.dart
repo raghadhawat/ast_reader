@@ -50,7 +50,6 @@ abstract class AppStyles {
 
 double getResponsiveFontSize(
     {required double baseFontSize, required BuildContext context}) {
-  MediaQueryData mediaQuery = MediaQuery.of(context);
 
   return baseFontSize; // 375 is an example base width
 }

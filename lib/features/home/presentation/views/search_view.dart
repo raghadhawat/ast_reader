@@ -5,7 +5,6 @@ import 'package:ast_reader/core/widgets/custom_text_form_field.dart';
 import 'package:ast_reader/features/home/presentation/views/widgets/date_choose_chip.dart';
 import 'package:ast_reader/features/home/presentation/views/widgets/result_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
 class SearchView extends StatefulWidget {
@@ -58,8 +57,6 @@ class _SearchViewState extends State<SearchView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Gap(20),
-          Center(child: SvgPicture.asset(Assets.imagesBlueLogo)),
           const Gap(23),
 
           // search
