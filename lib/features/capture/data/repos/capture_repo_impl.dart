@@ -93,9 +93,10 @@ class CaptureRepoImpl implements CaptureRepo {
       return left(ServerFailure(e.toString()));
     }
   }
-  
+
   @override
-  Future<Either<Failure, StatusModel>> acceptPlate({required int plateId}) async {
+  Future<Either<Failure, StatusModel>> acceptPlate(
+      {required int plateId}) async {
     try {
       var data = await apiServer.patch(
           endPoint: 'Plate/result/$plateId/accept', body: null, token: kToken);
@@ -110,9 +111,10 @@ class CaptureRepoImpl implements CaptureRepo {
       return left(ServerFailure(e.toString()));
     }
   }
-  
+
   @override
-  Future<Either<Failure, StatusModel>> confusePlate({required int plateId}) async {
+  Future<Either<Failure, StatusModel>> confusePlate(
+      {required int plateId}) async {
     try {
       var data = await apiServer.patch(
           endPoint: 'Plate/result/$plateId/confuse', body: null, token: kToken);

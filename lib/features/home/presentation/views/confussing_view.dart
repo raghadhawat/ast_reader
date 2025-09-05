@@ -23,15 +23,16 @@ class ConfussingView extends StatelessWidget {
           Expanded(
             child: ListView.separated(
                 itemBuilder: (context, index) {
-                  return ResultCard(
-                    name: 'John Doe',
-                    dateText: '2025-8-25 . 14:25',
-                    statusText: 'Confusing',
-                    avatar: Assets.imagesTestCard,
-                    onDownload: () {
-                      // TODO: trigger your Excel export
-                    },
-                  );
+                  return Text('data');
+                  //  ResultCard(
+                  //   name: 'John Doe',
+                  //   dateText: '2025-8-25 . 14:25',
+                  //   statusText: 'Confusing',
+                  //   avatar: Assets.imagesTestCard,
+                  //   onDownload: () {
+                  //     // TODO: trigger your Excel export
+                  //   },
+                  // );
                 },
                 separatorBuilder: (context, index) {
                   return Gap(18);

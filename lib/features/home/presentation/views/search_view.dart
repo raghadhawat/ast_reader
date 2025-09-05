@@ -84,13 +84,14 @@ class _SearchViewState extends State<SearchView> {
           // results
           Expanded(
             child: ListView.separated(
-              itemBuilder: (context, index) => ResultCard(
-                name: 'John Doe',
-                dateText: '2025-8-25 . 14:25',
-                statusText: 'Confusing',
-                avatar: Assets.imagesTestCard,
-                onDownload: () {},
-              ),
+              itemBuilder: (context, index) =>Text('data'),
+              //  ResultCard(
+              //   name: 'John Doe',
+              //   dateText: '2025-8-25 . 14:25',
+              //   statusText: 'Confusing',
+              //   avatar: Assets.imagesTestCard,
+              //   onDownload: () {},
+              // ),
               separatorBuilder: (context, index) => const Gap(18),
               itemCount: 4,
             ),

@@ -7,7 +7,7 @@ part 'acceptplate_state.dart';
 
 class AcceptplateCubit extends Cubit<AcceptplateState> {
   AcceptplateCubit(this.captureRepo) : super(AcceptplateInitial());
-   final CaptureRepo captureRepo;
+  final CaptureRepo captureRepo;
   Future<void> acceptPlateCubitFun({required int plateId}) async {
     emit(AcceptplateLoading());
     var result = await captureRepo.acceptPlate(plateId: plateId);

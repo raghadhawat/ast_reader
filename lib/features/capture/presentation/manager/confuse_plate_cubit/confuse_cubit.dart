@@ -7,7 +7,7 @@ part 'confuse_state.dart';
 
 class ConfuseCubit extends Cubit<ConfuseState> {
   ConfuseCubit(this.captureRepo) : super(ConfuseInitial());
-   final CaptureRepo captureRepo;
+  final CaptureRepo captureRepo;
   Future<void> confusePlateCubitFun({required int plateId}) async {
     emit(ConfuseLoading());
     var result = await captureRepo.confusePlate(plateId: plateId);

@@ -131,4 +131,29 @@ class ApiServer {
 
     return response.data;
   }
+  Future<Map<String, dynamic>> getWithQuery({
+  required String endPoint,
+  Map<String, dynamic>? query,            // optional query params
+  String? token,
+  Map<String, String>? headersfromRepo,   // optional header override
+}) async {
+  // Base headers
+  final headers = <String, String>{
+    "Accept": "application/json",
+    if (token != null) 'Authorization': 'Bearer $token',
+  };
+
+  // Clean null/empty values so URL is tidy
+  final qp = Map<String, dynamic>.from(query ?? {});
+  qp.removeWhere((k, v) => v == null || (v is String && v.isEmpty));
+
+  final response = await _dio.get(
+    '$baseUrl$endPoint',
+    queryParameters: qp.isEmpty ? null : qp,
+    options: Options(headers: headersfromRepo ?? headers),
+  );
+
+  return response.data;
+}
+
 }
