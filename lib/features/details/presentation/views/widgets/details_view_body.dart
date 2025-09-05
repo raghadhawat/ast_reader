@@ -1,4 +1,3 @@
-
 import 'package:ast_reader/features/details/presentation/views/widgets/antibiotics_table.dart';
 import 'package:ast_reader/features/details/presentation/views/widgets/notes_card.dart';
 import 'package:ast_reader/features/details/presentation/views/widgets/patient_date_card.dart';

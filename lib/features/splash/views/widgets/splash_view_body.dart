@@ -4,7 +4,6 @@ import 'package:ast_reader/features/auth/presentation/views/sign_in_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
 
@@ -41,7 +40,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
         const SizedBox(
           height: 8,
         ),
-       // SlidingSlogan(slidingAnimation: slidingAnimation),
+        // SlidingSlogan(slidingAnimation: slidingAnimation),
       ],
     );
   }

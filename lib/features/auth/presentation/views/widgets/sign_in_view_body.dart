@@ -1,13 +1,19 @@
-import 'dart:developer';
+import 'package:ast_reader/constants.dart';
 import 'package:ast_reader/core/utils/app_assets.dart';
 import 'package:ast_reader/core/utils/functions/navigate_function.dart';
+import 'package:ast_reader/core/utils/functions/snack_bar.dart';
+import 'package:ast_reader/core/utils/service_locator.dart';
 import 'package:ast_reader/core/utils/style.dart';
 import 'package:ast_reader/core/widgets/custom_button.dart';
 import 'package:ast_reader/core/widgets/custom_text_form_field.dart';
+import 'package:ast_reader/core/widgets/loading_button.dart';
+import 'package:ast_reader/features/auth/data/repos/auth_repo_impl.dart';
+import 'package:ast_reader/features/auth/presentation/manager/sign_in_cubit/sign_in_cubit.dart';
 import 'package:ast_reader/features/auth/presentation/views/sign_up_view.dart';
 import 'package:ast_reader/features/auth/presentation/views/widgets/auth_in_link.dart';
 import 'package:ast_reader/features/home/presentation/views/home_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
@@ -88,21 +94,45 @@ class _SignInViewBodyState extends State<SignInViewBody> {
                   const Gap(34),
 
                   Center(
-                    child: CustomButton(
-                      onPressed: () {
-                        // 🔑 Trigger all field validators
-                        final ok = _formKey.currentState?.validate() ?? false;
-                        if (!ok) return;
+                    child: BlocProvider(
+                      create: (context) =>
+                          SignInCubit(getIt.get<AuthRepoImpl>()),
+                      child: BlocConsumer<SignInCubit, SignInState>(
+                        listener: (context, state) {
+                          if (state is SignInsuccess) {
+                            navigateAndFinish(context, HomeView());
+                          }
+                          if (state is SignInFailure) {
+                            showAppError(context, state.errMessage);
+                          }
+                        },
+                        builder: (context, state) {
+                          return state is SignInLoading
+                              ? ButtonLoading(
+                                  width: 110, height: 50, color: kPrimaryColor)
+                              : CustomButton(
+                                  onPressed: () {
+                                    // 🔑 Trigger all field validators
+                                    final ok =
+                                        _formKey.currentState?.validate() ??
+                                            false;
+                                    if (!ok) return;
 
-                        // proceed (all fields valid)3
-                        log(email);
-                        log(pass);
-                        navigateAndFinish(context, HomeView());
-                      },
-                      text: Text(
-                        'Sign In',
-                        style: AppStyles.arialBold(context, 20)
-                            .copyWith(color: Colors.white),
+                                    if (ok) {
+                                      BlocProvider.of<SignInCubit>(context)
+                                          .signInCubitFun(
+                                        email: email,
+                                        password: pass,
+                                      );
+                                    }
+                                  },
+                                  text: Text(
+                                    'Sign In',
+                                    style: AppStyles.arialBold(context, 20)
+                                        .copyWith(color: Colors.white),
+                                  ),
+                                );
+                        },
                       ),
                     ),
                   ),

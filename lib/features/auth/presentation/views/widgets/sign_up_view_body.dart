@@ -1,11 +1,18 @@
-import 'dart:developer';
-
+import 'package:ast_reader/constants.dart';
 import 'package:ast_reader/core/utils/app_assets.dart';
+import 'package:ast_reader/core/utils/functions/navigate_function.dart';
+import 'package:ast_reader/core/utils/functions/snack_bar.dart';
+import 'package:ast_reader/core/utils/service_locator.dart';
 import 'package:ast_reader/core/utils/style.dart';
 import 'package:ast_reader/core/widgets/custom_button.dart';
 import 'package:ast_reader/core/widgets/custom_text_form_field.dart';
+import 'package:ast_reader/core/widgets/loading_button.dart';
+import 'package:ast_reader/features/auth/data/repos/auth_repo_impl.dart';
+import 'package:ast_reader/features/auth/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
 import 'package:ast_reader/features/auth/presentation/views/widgets/auth_in_link.dart';
+import 'package:ast_reader/features/home/presentation/views/home_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 
@@ -29,6 +36,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
   String pass = '';
   String confPass = '';
   bool showPass = true;
+  bool showPass1 = true;
 
   @override
   void initState() {
@@ -96,28 +104,57 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                   const Gap(34),
                   CustomTextFormField(
                     textEditingController: confPassController,
-                    showPass: showPass, // should map to obscureText internally
+                    showPass: showPass1, // should map to obscureText internally
                     icon: SvgPicture.asset(Assets.imagesConfPass),
                     hintText: 'confirm password',
-                    onTap: () => setState(() => showPass = !showPass),
+                    onTap: () => setState(() => showPass1 = !showPass1),
                   ),
 
                   const Gap(34),
                   Center(
-                    child: CustomButton(
-                      onPressed: () {
-                        // 🔑 Trigger all field validators
-                        final ok = _formKey.currentState?.validate() ?? false;
-                        if (!ok) return;
+                    child: BlocProvider(
+                      create: (context) =>
+                          SignUpCubit(getIt.get<AuthRepoImpl>()),
+                      child: BlocConsumer<SignUpCubit, SignUpState>(
+                        listener: (context, state) {
+                          if (state is SignUpSuccess) {
+                            navigateAndFinish(context, HomeView());
+                          }
+                          if (state is SignUpFailure) {
+                            showAppError(context, state.errMessage);
+                          }
+                        },
+                        builder: (context, state) {
+                          return state is SignUpLoading
+                              ? ButtonLoading(
+                                  width: 110, height: 50, color: kPrimaryColor)
+                              : CustomButton(
+                                  onPressed: () {
+                                    // 🔑 Trigger all field validators
+                                    final ok =
+                                        _formKey.currentState?.validate() ??
+                                            false;
+                                    if (!ok) return;
+                                    if (pass != confPass) {
+                                      showAppError(context,
+                                          'the password didn\'t match the confirm');
+                                    }
 
-                        // proceed (all fields valid)
-                        log(email);
-                        log(pass);
-                      },
-                      text: Text(
-                        'Sign up',
-                        style: AppStyles.arialBold(context, 20)
-                            .copyWith(color: Colors.white),
+                                    if (ok && (pass == confPass)) {
+                                      BlocProvider.of<SignUpCubit>(context)
+                                          .signUpCubitFun(
+                                              email: email,
+                                              password: pass,
+                                              name: name);
+                                    }
+                                  },
+                                  text: Text(
+                                    'Sign up',
+                                    style: AppStyles.arialBold(context, 20)
+                                        .copyWith(color: Colors.white),
+                                  ),
+                                );
+                        },
                       ),
                     ),
                   ),

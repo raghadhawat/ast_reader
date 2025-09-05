@@ -1,5 +1,3 @@
-
-
 import 'package:ast_reader/constants.dart';
 import 'package:ast_reader/core/utils/style.dart';
 import 'package:ast_reader/core/widgets/custom_button.dart';

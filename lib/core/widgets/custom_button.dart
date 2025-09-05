@@ -1,3 +1,4 @@
+import 'package:ast_reader/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -14,7 +15,7 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: color ?? Color(0xFF1C6E70),
+      color: color ?? kPrimaryColor,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
         onTap: onPressed,

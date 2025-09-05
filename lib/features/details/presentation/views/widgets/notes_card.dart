@@ -1,4 +1,3 @@
-
 import 'package:ast_reader/constants.dart';
 import 'package:ast_reader/features/details/presentation/views/widgets/header.dart';
 import 'package:flutter/material.dart';
@@ -38,4 +37,3 @@ class NotesCard extends StatelessWidget {
     );
   }
 }
-

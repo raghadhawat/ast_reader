@@ -12,7 +12,6 @@ class CustomTextFormField extends StatelessWidget {
       this.keyboardType,
       this.showPass,
       this.onTap,
-      
       this.isBorder = false});
   final TextEditingController? textEditingController;
   final Widget icon;
@@ -21,12 +20,10 @@ class CustomTextFormField extends StatelessWidget {
   final bool? showPass;
   final void Function()? onTap;
   final bool? isBorder;
-  
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-  
       controller: textEditingController,
       keyboardType: keyboardType,
       cursorColor: kGreyColor,
@@ -44,7 +41,7 @@ class CustomTextFormField extends StatelessWidget {
           prefixIcon: TextFieldIcon(icon: icon),
           suffix: GestureDetector(
             onTap: onTap,
-            child: Text(showPass == null  
+            child: Text(showPass == null
                 ? ''
                 : showPass!
                     ? 'show'
