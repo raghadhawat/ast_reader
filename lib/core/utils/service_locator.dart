@@ -1,5 +1,6 @@
 import 'package:ast_reader/core/utils/api_server.dart';
 import 'package:ast_reader/features/auth/data/repos/auth_repo_impl.dart';
+import 'package:ast_reader/features/capture/data/repos/capture_repo_impl.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -12,6 +13,11 @@ void setupServiceLocator() {
 
   getIt.registerSingleton<AuthRepoImpl>(
     AuthRepoImpl(
+      getIt.get<ApiServer>(),
+    ),
+  );
+  getIt.registerSingleton<CaptureRepoImpl>(
+    CaptureRepoImpl(
       getIt.get<ApiServer>(),
     ),
   );

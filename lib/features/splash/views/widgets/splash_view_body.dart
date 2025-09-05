@@ -1,6 +1,8 @@
+import 'package:ast_reader/constants.dart';
 import 'package:ast_reader/core/utils/app_assets.dart';
 import 'package:ast_reader/core/utils/functions/navigate_function.dart';
 import 'package:ast_reader/features/auth/presentation/views/sign_in_view.dart';
+import 'package:ast_reader/features/home/presentation/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -49,7 +51,12 @@ class _SplashViewBodyState extends State<SplashViewBody>
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        navigateAndFinish(context, SignInView());
+        if (kToken == null || kToken!.isEmpty) {
+          navigateAndFinish(context, SignInView());
+        } else {
+          navigateAndFinish(context, HomeView());
+        }
+
         //  GoRouter.of(context).pushReplacement(AppRouter.kSignIN);
         // Hive.box(kOnboarding).get('bool') == null || false
         //     ? GoRouter.of(context).pushReplacement(AppRouter.kOnboarduingView)
