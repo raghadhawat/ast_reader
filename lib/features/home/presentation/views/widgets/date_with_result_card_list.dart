@@ -1,6 +1,4 @@
-import 'package:ast_reader/core/utils/app_assets.dart';
 import 'package:ast_reader/core/utils/style.dart';
-import 'package:ast_reader/features/home/presentation/views/widgets/result_card.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 

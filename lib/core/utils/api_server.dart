@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class ApiServer {
-  final baseUrl = 'https://5dfc98e59891.ngrok-free.app/api/';
+  final baseUrl = 'https://867528394d1a.ngrok-free.app/api/';
 
   final Dio _dio;
   ApiServer(this._dio);
@@ -131,29 +131,29 @@ class ApiServer {
 
     return response.data;
   }
+
   Future<Map<String, dynamic>> getWithQuery({
-  required String endPoint,
-  Map<String, dynamic>? query,            // optional query params
-  String? token,
-  Map<String, String>? headersfromRepo,   // optional header override
-}) async {
-  // Base headers
-  final headers = <String, String>{
-    "Accept": "application/json",
-    if (token != null) 'Authorization': 'Bearer $token',
-  };
+    required String endPoint,
+    Map<String, dynamic>? query, // optional query params
+    String? token,
+    Map<String, String>? headersfromRepo, // optional header override
+  }) async {
+    // Base headers
+    final headers = <String, String>{
+      "Accept": "application/json",
+      if (token != null) 'Authorization': 'Bearer $token',
+    };
 
-  // Clean null/empty values so URL is tidy
-  final qp = Map<String, dynamic>.from(query ?? {});
-  qp.removeWhere((k, v) => v == null || (v is String && v.isEmpty));
+    // Clean null/empty values so URL is tidy
+    final qp = Map<String, dynamic>.from(query ?? {});
+    qp.removeWhere((k, v) => v == null || (v is String && v.isEmpty));
 
-  final response = await _dio.get(
-    '$baseUrl$endPoint',
-    queryParameters: qp.isEmpty ? null : qp,
-    options: Options(headers: headersfromRepo ?? headers),
-  );
+    final response = await _dio.get(
+      '$baseUrl$endPoint',
+      queryParameters: qp.isEmpty ? null : qp,
+      options: Options(headers: headersfromRepo ?? headers),
+    );
 
-  return response.data;
-}
-
+    return response.data;
+  }
 }

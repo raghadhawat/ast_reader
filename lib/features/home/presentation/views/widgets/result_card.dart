@@ -23,7 +23,7 @@ class ResultCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        navigateTo(context, DetailsView());
+        navigateTo(context, DetailsView(data: data,));
       },
       child: Container(
         padding: const EdgeInsets.all(14),
@@ -51,8 +51,7 @@ class ResultCard extends StatelessWidget {
                   child: ClipRRect(
                       borderRadius: BorderRadius.all(Radius.circular(50)),
                       child: CachedNetworkImage(
-                          imageUrl:
-                              'https://5dfc98e59891.ngrok-free.app/${data.image!.path!}',
+                          imageUrl: '$kBaseUrl${data.image!.path!}',
                           imageBuilder: (context, imageProvider) => Image(
                                 image: imageProvider,
                                 fit: BoxFit.fill,

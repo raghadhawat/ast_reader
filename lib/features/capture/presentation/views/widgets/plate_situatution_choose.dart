@@ -25,7 +25,7 @@ class PlateSituationChoose extends StatelessWidget {
       children: [
         Gap(11),
         Text(
-          'This is the result of you plate please choose the situation of the plate to save the result',
+          'This is the result of your plate, please choose the situation of the plate to save the result',
           style: AppStyles.arialBold(context, 15),
         ),
         Gap(22),

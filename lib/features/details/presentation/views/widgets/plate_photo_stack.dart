@@ -1,35 +1,52 @@
 import 'package:ast_reader/constants.dart';
-import 'package:ast_reader/core/utils/app_assets.dart';
-import 'package:ast_reader/core/utils/style.dart';
-import 'package:ast_reader/core/widgets/custom_button.dart';
 import 'package:ast_reader/features/details/presentation/views/widgets/plate_photo.dart';
+import 'package:ast_reader/features/home/data/models/all_plates_model/datum.dart';
 import 'package:flutter/material.dart';
 
 class PlatePhotoStack extends StatelessWidget {
-  const PlatePhotoStack({super.key});
-
+  const PlatePhotoStack({super.key, required this.data});
+  final Datum data;
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         PlatePhoto(
-          image: Image.asset(Assets.imagesTestPlate),
+          data: data,
         ),
         Positioned(
-          top: 10,
-          right: 20,
-          child: CustomButton(
-            onPressed: () {},
-            padding: 5,
-            text: Text(
-              'Acceptable',
-              style: AppStyles.arialBold(context, 12)
-                  .copyWith(color: Colors.white),
-            ),
-            color: kGreenColor,
-          ),
-        ),
+            top: 10,
+            right: 20,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+              decoration: BoxDecoration(
+                color: statusColor(data.result!.status),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                data.result!.status!,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12.5,
+                ),
+              ),
+            )),
       ],
     );
+  }
+}
+
+Color statusColor(String? status) {
+  switch ((status ?? '').toLowerCase()) {
+    case 'undetected':
+      return kPrimaryColor; // your primary
+    case 'done':
+      return kGreenColor; // nice green; or define kGreenColor
+    case 'rejected':
+      return kRedColor;
+    case 'confused':
+      return kOrangeColor;
+    default:
+      return const Color(0xFF9CA3AF); // neutral grey fallback
   }
 }

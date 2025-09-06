@@ -1,28 +1,17 @@
 import 'package:ast_reader/constants.dart';
 import 'package:ast_reader/core/utils/style.dart';
-import 'package:ast_reader/features/details/presentation/views/widgets/antibiotics_table.dart';
 import 'package:ast_reader/features/details/presentation/views/widgets/details_view_body.dart';
 import 'package:ast_reader/features/details/presentation/views/widgets/plate_photo_stack.dart';
+import 'package:ast_reader/features/home/data/models/all_plates_model/datum.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class DetailsView extends StatelessWidget {
-  const DetailsView({super.key});
-
+  const DetailsView({super.key, required this.data});
+  final Datum data;
   @override
   Widget build(BuildContext context) {
-    final data = <AntibioticMeasurement>[
-      const AntibioticMeasurement(
-          antibiotic: 'Amc 30', diameterMm: 23.6, status: Susceptibility.i),
-      const AntibioticMeasurement(
-          antibiotic: 'CIP 5', diameterMm: 18.4, status: Susceptibility.s),
-      const AntibioticMeasurement(
-          antibiotic: 'CN 10', diameterMm: 16.3, status: Susceptibility.r),
-      const AntibioticMeasurement(
-          antibiotic: 'Amc 30', diameterMm: 23.6, status: Susceptibility.i),
-      const AntibioticMeasurement(
-          antibiotic: 'Amc 30', diameterMm: 23.6, status: Susceptibility.i),
-    ];
+    
 
     return SafeArea(
         child: Scaffold(
@@ -42,8 +31,10 @@ class DetailsView extends StatelessWidget {
             children: [
               //    PlateSituationChoose(),
               Gap(36),
-              PlatePhotoStack(),
-              DetailsViewBody(data: data),
+              PlatePhotoStack(
+                data: data,
+              ),
+              DetailsViewBody(datum: data,),
             ],
           ),
         ),

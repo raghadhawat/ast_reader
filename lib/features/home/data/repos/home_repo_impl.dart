@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:ast_reader/constants.dart';
 import 'package:ast_reader/core/errors/failures.dart';
 import 'package:ast_reader/core/utils/api_server.dart';
@@ -25,7 +27,7 @@ class HomeRepoImpl implements HomeRepo {
       final query = <String, dynamic>{
         'search': search,
         'status': status,
-        'fistName': firstName, // keep the backend's spelling
+        'firstName': firstName, // keep the backend's spelling
         'lastName': lastName,
         'startDate': startDate,
         'endDate': endDate,
@@ -33,13 +35,13 @@ class HomeRepoImpl implements HomeRepo {
         'skip': 0,
         'limit': 1000000,
       };
-
+      log(query.toString());
       final data = await apiServer.getWithQuery(
         endPoint: 'Plate', // baseUrl already includes /api/
         query: query,
         token: kToken,
       );
-
+      log(data.toString());
       final model = AllPlatesModel.fromJson(data); // <-- your model
       return right(model);
     } catch (e) {
@@ -49,7 +51,4 @@ class HomeRepoImpl implements HomeRepo {
       return left(ServerFailure(e.toString()));
     }
   }
-
-  @override
-  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }

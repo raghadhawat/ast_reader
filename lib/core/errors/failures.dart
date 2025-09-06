@@ -36,7 +36,7 @@ class ServerFailure extends Failure {
         statusCode == 403 ||
         statusCode == 422 ||
         statusCode == 404) {
-      return ServerFailure(response["message"]);
+      return ServerFailure(response.toString());
     }
     // else if (statusCode == 404) {
     //   return ServerFailure('Your request not found, Please try later');

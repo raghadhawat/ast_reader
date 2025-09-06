@@ -73,24 +73,7 @@ class FetchErrorWidget extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.all(compact ? 8 : 16),
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: compact ? 14 : 18,
-          vertical: compact ? 14 : 18,
-        ),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(18),
-          boxShadow: const [
-            BoxShadow(
-              color: Color(0x1A000000),
-              blurRadius: 16,
-              offset: Offset(0, 6),
-            ),
-          ],
-        ),
-        child: Center(child: content),
-      ),
+      child: Center(child: content),
     );
   }
 }

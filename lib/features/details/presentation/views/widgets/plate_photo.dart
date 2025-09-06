@@ -1,16 +1,19 @@
+import 'package:ast_reader/constants.dart';
+import 'package:ast_reader/features/home/data/models/all_plates_model/datum.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class PlatePhoto extends StatelessWidget {
   const PlatePhoto({
     super.key,
-    required this.image, // AssetImage / NetworkImage / FileImage
     this.radius = 16,
-    this.aspectRatio = 16 / 10, // tweak to your photo’s shape
+    this.aspectRatio = 16 / 10,
+    required this.data, // tweak to your photo’s shape
   });
 
-  final Widget image;
   final double radius;
   final double aspectRatio;
+  final Datum data;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +29,17 @@ class PlatePhoto extends StatelessWidget {
         ],
       ),
       clipBehavior: Clip.antiAlias, // ensures rounded corners clip the image
-      child: AspectRatio(aspectRatio: aspectRatio, child: image),
+      child: AspectRatio(
+          aspectRatio: aspectRatio,
+          child: CachedNetworkImage(
+              imageUrl: '$kBaseUrl${data.image!.path!}',
+              imageBuilder: (context, imageProvider) => Image(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
+              errorWidget: (context, url, error) {
+                return Icon(Icons.error_outline);
+              })),
     );
   }
 }

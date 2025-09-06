@@ -1,4 +1,3 @@
-import 'package:ast_reader/core/utils/app_assets.dart';
 import 'package:ast_reader/core/utils/service_locator.dart';
 import 'package:ast_reader/core/utils/style.dart';
 import 'package:ast_reader/core/widgets/fetch_error_widget.dart';
@@ -50,12 +49,23 @@ class AllResultView extends StatelessWidget {
               );
             }
             if (state is AllPlatesLoading) {
-              return Expanded(
-                child: ListView.separated(
-                  itemCount: 6,
-                  separatorBuilder: (_, __) => const SizedBox(height: 18),
-                  itemBuilder: (_, __) => const ResultCardShimmer(),
-                ),
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Gap(23),
+                  Text(
+                    'All Result',
+                    style: AppStyles.arialBold(context, 21),
+                  ),
+                  Gap(23),
+                  Expanded(
+                    child: ListView.separated(
+                      itemCount: 6,
+                      separatorBuilder: (_, __) => const SizedBox(height: 18),
+                      itemBuilder: (_, __) => const ResultCardShimmer(),
+                    ),
+                  ),
+                ],
               );
             }
             if (state is AllPlatesFailure) {

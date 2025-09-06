@@ -12,7 +12,7 @@ class CustomTextFormField extends StatelessWidget {
       this.keyboardType,
       this.showPass,
       this.onTap,
-      this.isBorder = false});
+      this.isBorder = false, this.onChanged});
   final TextEditingController? textEditingController;
   final Widget icon;
   final String hintText;
@@ -20,10 +20,12 @@ class CustomTextFormField extends StatelessWidget {
   final bool? showPass;
   final void Function()? onTap;
   final bool? isBorder;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged:onChanged ,
       controller: textEditingController,
       keyboardType: keyboardType,
       cursorColor: kGreyColor,
