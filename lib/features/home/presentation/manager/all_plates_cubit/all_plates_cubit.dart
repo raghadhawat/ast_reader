@@ -4,32 +4,55 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
 part 'all_plates_state.dart';
-
 class AllPlatesCubit extends Cubit<AllPlatesState> {
   AllPlatesCubit(this.homeRepo) : super(AllPlatesInitial());
   final HomeRepo homeRepo;
+
+  int _reqCounter = 0; // prevents race conditions
+
   Future<void> getAllPlatesCubitFunction({
     String? search,
     String? status,
-    String?
-        firstName, // NOTE: Swagger shows "fistName" (typo). Backend expects "fistName".
+    String? firstName,
     String? lastName,
-    String? startDate, // e.g. "2025-09-01" or ISO string per backend
-    String? endDate, // e.g. "2025-09-05"
+    String? startDate,
+    String? endDate,
     int? userId,
   }) async {
+    if (isClosed) return;
+
+    // mark this invocation
+    final int myReq = ++_reqCounter;
+
     emit(AllPlatesLoading());
-    var result = await homeRepo.getAllPlates(
-        search: search,
-        status: status,
-        firstName: firstName,
-        lastName: lastName,
-        startDate: startDate,
-        endDate: endDate);
-    result.fold((failure) {
-      emit(AllPlatesFailure(errMessage: failure.errMessage));
-    }, (allPlatesModel) async {
-      emit(AllPlatesSuccess(allPlatesModel: allPlatesModel));
-    });
+
+    final result = await homeRepo.getAllPlates(
+      search: search,
+      status: status,
+      firstName: firstName,
+      lastName: lastName,
+      startDate: startDate,
+      endDate: endDate,
+    );
+
+    // if another call started after this one, drop this response
+    if (isClosed || myReq != _reqCounter) return;
+
+    result.fold(
+      (failure) {
+        if (isClosed) return;
+        emit(AllPlatesFailure(errMessage: failure.errMessage));
+      },
+      (allPlatesModel) {
+        if (isClosed) return;
+        emit(AllPlatesSuccess(allPlatesModel: allPlatesModel));
+      },
+    );
+  }
+
+  @override
+  Future<void> close() {
+    _reqCounter++; // invalidate any in-flight requests
+    return super.close();
   }
 }

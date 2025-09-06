@@ -40,7 +40,7 @@ Color statusColor(String? status) {
   switch ((status ?? '').toLowerCase()) {
     case 'undetected':
       return kPrimaryColor; // your primary
-    case 'done':
+    case 'accepted':
       return kGreenColor; // nice green; or define kGreenColor
     case 'rejected':
       return kRedColor;

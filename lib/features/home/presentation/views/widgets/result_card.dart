@@ -23,7 +23,11 @@ class ResultCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        navigateTo(context, DetailsView(data: data,));
+        navigateTo(
+            context,
+            DetailsView(
+              data: data,
+            ));
       },
       child: Container(
         padding: const EdgeInsets.all(14),
@@ -140,7 +144,7 @@ Color statusColor(String? status) {
   switch ((status ?? '').toLowerCase()) {
     case 'undetected':
       return kPrimaryColor; // your primary
-    case 'done':
+    case 'accepted':
       return kGreenColor; // nice green; or define kGreenColor
     case 'rejected':
       return kRedColor;

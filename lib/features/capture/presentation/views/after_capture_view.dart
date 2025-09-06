@@ -5,16 +5,15 @@ import 'package:ast_reader/features/details/presentation/views/widgets/antibioti
 import 'package:ast_reader/features/details/presentation/views/widgets/details_view_body.dart';
 import 'package:ast_reader/features/details/presentation/views/widgets/plate_photo.dart';
 import 'package:ast_reader/features/capture/presentation/views/widgets/plate_situatution_choose.dart';
+import 'package:ast_reader/features/home/data/models/all_plates_model/datum.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class AfterCaptureView extends StatelessWidget {
-  const AfterCaptureView({super.key});
-
+  const AfterCaptureView({super.key, required this.data});
+  final Datum data;
   @override
   Widget build(BuildContext context) {
-   
-
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
@@ -32,11 +31,13 @@ class AfterCaptureView extends StatelessWidget {
           child: Column(
             children: [
               Gap(36),
-              // PlatePhoto(
-              //  data: ,
-              // ),
-           //   DetailsViewBody(data: data),
-              PlateSituationChoose(),
+              PlatePhoto(
+                data: data,
+              ),
+              DetailsViewBody(datum: data),
+              PlateSituationChoose(
+                id: data.id!,
+              ),
               Gap(20)
             ],
           ),

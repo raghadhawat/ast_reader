@@ -16,9 +16,9 @@ import 'package:gap/gap.dart';
 
 class PlateSituationChoose extends StatelessWidget {
   const PlateSituationChoose({
-    super.key,
+    super.key, required this.id,
   });
-
+final int id;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,7 +51,7 @@ class PlateSituationChoose extends StatelessWidget {
                       : CustomButton(
                           onPressed: () {
                             BlocProvider.of<AcceptplateCubit>(context)
-                                .acceptPlateCubitFun(plateId: 3);
+                                .acceptPlateCubitFun(plateId: id);
                           },
                           text: Text(
                             'Acceptable',
@@ -82,7 +82,7 @@ class PlateSituationChoose extends StatelessWidget {
                       : CustomButton(
                           onPressed: () {
                             BlocProvider.of<ConfuseCubit>(context)
-                                .confusePlateCubitFun(plateId: 3);
+                                .confusePlateCubitFun(plateId: id);
                           },
                           text: Text(
                             'Confusing',
@@ -113,7 +113,7 @@ class PlateSituationChoose extends StatelessWidget {
                       : CustomButton(
                           onPressed: () {
                             BlocProvider.of<RejectPlateCubit>(context)
-                                .rejectPlateCubitFun(plateId: 2);
+                                .rejectPlateCubitFun(plateId: id);
                           },
                           text: Text(
                             'Rejected',

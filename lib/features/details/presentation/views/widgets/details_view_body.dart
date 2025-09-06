@@ -8,11 +8,9 @@ import 'package:gap/gap.dart';
 class DetailsViewBody extends StatelessWidget {
   const DetailsViewBody({
     super.key,
-   
     required this.datum,
   });
 
-  
   final Datum datum;
   @override
   Widget build(BuildContext context) {

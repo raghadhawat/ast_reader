@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:ast_reader/constants.dart';
@@ -6,6 +7,7 @@ import 'package:ast_reader/core/utils/api_server.dart';
 import 'package:ast_reader/features/capture/data/models/add_photo_model.dart';
 import 'package:ast_reader/features/capture/data/models/status_model.dart';
 import 'package:ast_reader/features/capture/data/repos/capture_repo.dart';
+import 'package:ast_reader/features/home/data/models/all_plates_model/datum.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
@@ -122,6 +124,36 @@ class CaptureRepoImpl implements CaptureRepo {
       StatusModel statusModel = StatusModel.fromJson(data);
 
       return right(statusModel);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioException(e));
+      }
+      return left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Datum>> createPlate(
+      {required String firstName,
+      required String lastName,
+      required String number,
+      required String notes,
+      required int imageId}) async {
+    try {
+      var data = await apiServer.post(
+          endPoint: 'Plate',
+          body: {
+            "patientFirstName": firstName,
+            "patientLastName": lastName,
+            "patientNumber": number,
+            "mediaId": imageId,
+            "notes": notes
+          },
+          token: kToken);
+
+      Datum datum = Datum.fromJson(data['result']);
+
+      return right(datum);
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioException(e));
