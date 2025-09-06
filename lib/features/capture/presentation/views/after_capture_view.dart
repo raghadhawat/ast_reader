@@ -1,7 +1,5 @@
 import 'package:ast_reader/constants.dart';
-import 'package:ast_reader/core/utils/app_assets.dart';
 import 'package:ast_reader/core/utils/style.dart';
-import 'package:ast_reader/features/details/presentation/views/widgets/antibiotics_table.dart';
 import 'package:ast_reader/features/details/presentation/views/widgets/details_view_body.dart';
 import 'package:ast_reader/features/details/presentation/views/widgets/plate_photo.dart';
 import 'package:ast_reader/features/capture/presentation/views/widgets/plate_situatution_choose.dart';

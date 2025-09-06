@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:ast_reader/features/capture/data/repos/capture_repo.dart';
 import 'package:ast_reader/features/home/data/models/all_plates_model/datum.dart';

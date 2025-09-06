@@ -2,6 +2,7 @@ import 'package:ast_reader/constants.dart';
 import 'package:ast_reader/core/utils/service_locator.dart';
 import 'package:ast_reader/features/splash/views/splash_view.dart';
 import 'package:ast_reader/simple_bloc_observer.dart';
+import 'package:ast_reader/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,7 +24,7 @@ class AstReader extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: kName,
       theme: ThemeData(fontFamily: 'Arimo'),
-      home: SplashView(),
+      home:Test(),
     );
   }
 }

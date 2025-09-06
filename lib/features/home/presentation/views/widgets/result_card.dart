@@ -1,5 +1,6 @@
 import 'package:ast_reader/constants.dart';
 import 'package:ast_reader/core/utils/app_assets.dart';
+import 'package:ast_reader/core/utils/download_excel.dart';
 import 'package:ast_reader/core/utils/functions/navigate_function.dart';
 import 'package:ast_reader/core/utils/style.dart';
 import 'package:ast_reader/core/widgets/custom_button.dart';
@@ -111,12 +112,18 @@ class ResultCard extends StatelessWidget {
 
             // ---- Download button (full width, pill, icons left & right)
             CustomButton(
-              onPressed: () {},
+              onPressed: () {
+                // downloadExcelFromPath(
+                //   context,
+                //   path: 'path', // <-- the value you said you stored
+                //   fileName: 'Result_${DateTime.now().millisecondsSinceEpoch}.xlsx',
+                //   openAfterSave: false,
+                // );
+              },
               text: Row(
                 children: [
-                  SvgPicture.asset(Assets
-                      .imagesExcelIcon), // swap with your Excel SVG if you have one
-                  SizedBox(width: 10),
+                  SvgPicture.asset(Assets.imagesExcelIcon),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Text(
                       'Download Excel',
@@ -125,11 +132,8 @@ class ResultCard extends StatelessWidget {
                           .copyWith(color: Colors.white),
                     ),
                   ),
-                  SizedBox(width: 10),
-                  Icon(
-                    Icons.download_rounded,
-                    color: Colors.white,
-                  ),
+                  const SizedBox(width: 10),
+                  const Icon(Icons.download_rounded, color: Colors.white),
                 ],
               ),
             )
