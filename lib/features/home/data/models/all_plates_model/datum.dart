@@ -8,6 +8,7 @@ class Datum {
   Patient? patient;
   String? notes;
   Image? image;
+  String? excelPath;
   DateTime? createdAt;
   DateTime? updatedAt;
 
@@ -17,6 +18,7 @@ class Datum {
     this.patient,
     this.notes,
     this.image,
+    this.excelPath,
     this.createdAt,
     this.updatedAt,
   });
@@ -30,6 +32,7 @@ class Datum {
             ? null
             : Patient.fromJson(json['patient'] as Map<String, dynamic>),
         notes: json['notes'] as String?,
+        excelPath: json['excel_path'] as String?,
         image: json['image'] == null
             ? null
             : Image.fromJson(json['image'] as Map<String, dynamic>),
@@ -43,6 +46,7 @@ class Datum {
 
   Map<String, dynamic> toJson() => {
         'id': id,
+        'excel_path': excelPath,
         'result': result?.toJson(),
         'patient': patient?.toJson(),
         'notes': notes,

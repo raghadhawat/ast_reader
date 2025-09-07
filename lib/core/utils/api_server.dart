@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class ApiServer {
-  final baseUrl = 'https://867528394d1a.ngrok-free.app/api/';
+  final baseUrl = 'https://62e7f03ec0ca.ngrok-free.app/api/';
 
   final Dio _dio;
   ApiServer(this._dio);

@@ -2,7 +2,7 @@ import 'package:ast_reader/core/utils/secure_storage.dart';
 import 'package:flutter/material.dart';
 
 const kName = 'AST_READER';
-const kBaseUrl = 'https://867528394d1a.ngrok-free.app/';
+const kBaseUrl = 'https://62e7f03ec0ca.ngrok-free.app/';
 const kPrimaryColor = Color(0xFF1C6E70);
 const kGreyColor = Color(0xff707070);
 const kGreenColor = Color(0xff0D9488);

@@ -113,12 +113,12 @@ class ResultCard extends StatelessWidget {
             // ---- Download button (full width, pill, icons left & right)
             CustomButton(
               onPressed: () {
-                // downloadExcelFromPath(
-                //   context,
-                //   path: 'path', // <-- the value you said you stored
-                //   fileName: 'Result_${DateTime.now().millisecondsSinceEpoch}.xlsx',
-                //   openAfterSave: false,
-                // );
+                downloadExcelToAppDocs(
+                  context,
+                  urlOrPath:
+                      '$kBaseUrl${data.excelPath!}', // <-- the value you said you stored
+                  fileName: 'Result.xlsx',
+                );
               },
               text: Row(
                 children: [

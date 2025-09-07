@@ -17,8 +17,8 @@ class Test extends StatelessWidget {
             downloadExcelToAppDocs(
               context,
               urlOrPath:
-                  'https://github.com/plotly/datasets/raw/master/2014_apple_stock.csv', // <-- the value you said you stored
-              fileName: 'Result_${DateTime.now().millisecondsSinceEpoch}.xlsx',
+                  'https://www.ou.edu/content/dam/cms/docs/sample-excel-file.xlsx', // <-- the value you said you stored
+              fileName: 'Result_${DateTime.now()}.xlsx',
             );
           },
           text: Row(

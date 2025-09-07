@@ -1,3 +1,5 @@
+import 'package:ast_reader/constants.dart';
+import 'package:ast_reader/core/utils/download_excel.dart';
 import 'package:ast_reader/features/details/presentation/views/widgets/antibiotics_table.dart';
 import 'package:ast_reader/features/details/presentation/views/widgets/notes_card.dart';
 import 'package:ast_reader/features/details/presentation/views/widgets/patient_date_card.dart';
@@ -35,7 +37,12 @@ class DetailsViewBody extends StatelessWidget {
           headerDiameter: 'Diameter (mm)',
           headerStatus: 'S\\I\\R',
           onDownload: () {
-            // call your Excel downloader here
+            downloadExcelToAppDocs(
+              context,
+              urlOrPath:
+                  '$kBaseUrl${datum.excelPath!}', // <-- the value you said you stored
+              fileName: 'Result.xlsx',
+            );
           },
         ),
         Gap(18),
